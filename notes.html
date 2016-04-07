@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+
+   <head>
+	<meta charset="utf8">
+    
+		<link rel="stylesheet" href="css/material.min.css">
+<script src="js/material.min.js"></script>
+       <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ 
+   </head>
+	
+   <body>
+<!-- Uses a transparent header that draws on top of the layout's background -->
+       <style>
+.demo-card-wide.mdl-card {
+  width: 100%;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+.mdl-card__menu {
+    position: absolute;
+    /* left: 212px; */
+    /* top: 21px; */
+    left: 50%;
+    /* font-size: 50px; */
+    right: 50%;
+    top: 25%;
+    bottom: 50%;
+}
+           .mdl-card{min-height: 0}
+</style>
+<style>
+    .mdl-layout__header-row .mdl-navigation__link {color : #fff;font-weight: bold;background:#9E9E9E;border:none;cursor:pointer}
+</style>
+
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header" style="background:url('img/note.png') no-repeat;" >
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">NoteLab!</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--all-screen-only">
+     <button id="show-dialog" type="button" class="mdl-navigation__link"><img src="img/addnote.png"></button>
+   </nav>
+    </div>
+  </header>
+ 
+  <main class="mdl-layout__content">
+    <div class="page-content">
+        <dialog class="mdl-dialog">
+    <h4 class="mdl-dialog__title">Not ekle!</h4>
+    <div class="mdl-dialog__content">
+        <!-- Simple Textfield -->
+  <div class="mdl-textfield mdl-js-textfield">
+      <textarea class="mdl-textfield__input" type="text" name="catname" id="catname"></textarea>
+    <label class="mdl-textfield__label" for="sample1">Açıklama</label>
+  </div>
+
+
+    </div>
+    <div class="mdl-dialog__actions">
+    <button type="button" id="addcar" class="mdl-button" onclick="addCar();">Ekle</button>
+      <button type="button" class="mdl-button close">İptal!</button>
+    </div>
+
+  </dialog>
+        <script>
+         $("#noteadd").click(function(){
+         alert("s"); 
+      });
+
+        </script>
+              <script>
+               //Test for browser compatibility
+if (window.openDatabase) {
+      var cat_type = location.hash;
+        var cat_sub = cat_type.substring(1);
+    //Create the database the parameters are 1. the database name 2.version number 3. a description 4. the size of the database (in bytes) 1024 x 1024 = 1MB
+    var mydb = openDatabase("NoteLab", "1.0", "Your Notes Database", 1024 * 1024);
+
+    //create the cars table using SQL for the database using a transaction
+    mydb.transaction(function (t) {
+        t.executeSql("CREATE TABLE IF NOT EXISTS cats (id INTEGER PRIMARY KEY ASC, name TEXT, cat INTEGER)");
+    });
+    
+        mydb.transaction(function (t) {
+        t.executeSql("CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY ASC, name TEXT, cat INTEGER)");
+    });
+
+
+
+} else {
+    alert("WebSQL is not supported by your browser!");
+}
+
+//function to output the list of cars in the database
+
+function updateCarList(transaction, results) {
+    //initialise the listitems variable
+    var listitems = "";
+    //get the car list holder ul
+    var listholder = document.getElementById("catlist");
+
+    //clear cars list ul
+    listholder.innerHTML = "";
+
+    var i;
+    //Iterate through the results
+    for (i = 0; i < results.rows.length; i++) {
+        //Get the current row
+        var row = results.rows.item(i);
+
+        listholder.innerHTML += '<div class="demo-card-wide mdl-card mdl-shadow--2dp"><div class="mdl-card__title" id="cat'+row.id+'"><h2 class="mdl-card__title-text">'+row.name+'</h2>  </div><div class="mdl-card__menu"><a style="color:#fff" href="javascript:void(0);" onclick="deleteCar(' + row.id + ');"><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><img src="img/delete.png"></button></a>  </div></div><br>';
+        listholder.innerHTML +="<style>.demo-card-wide > #cat"+row.id+" {background: url('img/"+row.cat+".jpg') center / cover;}</style>";
+    }
+
+}
+
+//function to get the list of cars from the database
+
+function outputCars() {
+    //check to ensure the mydb object has been created
+    if (mydb) {
+        //Get all the cars from the database with a select statement, set outputCarList as the callback function for the executeSql command
+        mydb.transaction(function (t) {
+            t.executeSql("SELECT * FROM notes WHERE cat=? order by id DESC", [cat_sub], updateCarList);
+        });
+    } else {
+        alert("db not found, your browser does not support web sql!");
+    }
+}
+
+//function to add the car to the database
+
+function addCar() {
+    //check to ensure the mydb object has been created
+    if (mydb) {
+        //get the values of the make and model text inputs
+        var catname = document.getElementById("catname").value;
+      
+
+        //Test to ensure that the user has entered both a make and model
+        if (catname !== "" && cat_sub !== "") {
+            //Insert the user entered details into the cars table, note the use of the ? placeholder, these will replaced by the data passed in as an array as the second parameter
+            mydb.transaction(function (t) {
+                t.executeSql("INSERT INTO notes (name, cat) VALUES (?, ?)", [catname, cat_sub]);
+                outputCars();
+            });
+        } else {
+            alert("Lütfen bir açıklama girin!");
+        }
+    } else {
+        alert("db not found, your browser does not support web sql!");
+    }
+}
+
+
+//function to remove a car from the database, passed the row id as it's only parameter
+
+function deleteCar(id) {
+    //check to ensure the mydb object has been created
+    if (mydb) {
+        //Get all the cars from the database with a select statement, set outputCarList as the callback function for the executeSql command
+        mydb.transaction(function (t) {
+            t.executeSql("DELETE FROM notes WHERE id=?", [id], outputCars);
+        });
+    } else {
+        alert("db not found, your browser does not support web sql!");
+    }
+}
+
+outputCars();</script>
+  <script>
+  
+    var dialog = document.querySelector('dialog');
+    var showDialogButton = document.querySelector('#show-dialog');
+    if (! dialog.showModal) {
+      dialogPolyfill.registerDialog(dialog);
+    }
+    showDialogButton.addEventListener('click', function() {
+      dialog.showModal();
+    });
+    dialog.querySelector('.close').addEventListener('click', function() {
+      dialog.close();
+    });
+    
+  </script>
+    <div id="catlist"></div>
+
+      </div>
+  </main>
+</div>
+       
+    </body>
+	
+</html>

@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+
+    <title>iphone number pad - Bootsnipp.com</title>
+       <script src="js/jquery.js"></script>
+<script>
+ if (localStorage.password) {
+ }else{
+window.location = "main.html";
+ }
+</script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/pass.css" rel="stylesheet" id="bootstrap-css">
+    <style type="text/css">
+
+body
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato' , sans-serif;
+    color: #333;
+    background-size: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+    background:url("img/bg.jpg") no-repeat center;
+}
+p
+{
+    margin: 0;
+    padding: 0 0 10px 0;
+    line-height: 20px;
+}
+.span4
+{
+    width: 80px;
+    float: left;
+    margin: 0 8px 10px 8px;
+}
+
+.phone
+{
+        width: 57%;
+    margin: auto;
+    margin-top: 15px;
+}
+.tel
+{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: none;
+    -webkit-text-security: disc;
+    font-size:28px
+        text-align:Center;
+    height: 50px;
+}
+
+.num-pad
+{
+    padding-left: 15px;
+        width: 203%;
+    margin: 9px -70px 0;
+}
+
+
+.num
+{
+    border: 1px solid #9e9e9e;
+    -webkit-border-radius: 999px;
+    border-radius: 999px;
+    -moz-border-radius: 999px;
+    height: 80px;
+    background-color: rgba(0,0,0,.25);;
+    color: #fff;
+    cursor: pointer;
+}
+.num:hover
+{
+    background-color: #9e9e9e;
+    color: #fff;
+    transition-property: background-color .2s linear 0s;
+    -moz-transition: background-color .2s linear 0s;
+    -webkit-transition: background-color .2s linear 0s;
+    -o-transition: background-color .2s linear 0s;
+}
+.txt,.action
+{
+    font-size: 30px;
+    text-align: center;
+    margin-top: 27px;
+    font-family: 'Lato' , sans-serif;
+    line-height: 30px;
+    color: #fff;
+}
+.small
+{
+    font-size: 15px;
+}
+
+.btn
+{
+    font-weight: bold;
+    -webkit-transition: .1s ease-in background-color;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 1px;
+}
+.btn:hover
+{
+    transition-property: background-color .2s linear 0s;
+    -moz-transition: background-color .2s linear 0s;
+    -webkit-transition: background-color .2s linear 0s;
+    -o-transition: background-color .2s linear 0s;
+}
+.spanicons
+{
+    width: 72px;
+    float: left;
+    text-align: center;
+    margin-top: 40px;
+    color: #9e9e9e;
+    font-size: 30px;
+    cursor: pointer;
+}
+.spanicons:hover
+{
+    color: #3498db;
+    transition-property: color .2s linear 0s;
+    -moz-transition: color .2s linear 0s;
+    -webkit-transition: color .2s linear 0s;
+    -o-transition: color .2s linear 0s;
+}
+.active
+{
+    color: #3498db;
+}
+@media only screen and (max-width: 300px) {
+
+    .num-pad{
+     /* padding-left: 15px; */
+    width: 150%;
+     margin: 0 -84px 0; 
+    left: -0%;
+    position: absolute;
+    top: 50%;
+    right: 50%;}
+        }
+@media only screen and (min-width: 301px) and (max-width: 330px) {
+
+    .num-pad{
+     /* padding-left: 15px; */
+    width: 210%;
+     margin: 0 -84px 0; 
+    left: -0%;
+    position: absolute;
+    top: 50%;
+    right: 50%;}
+        }
+@media only screen and (min-width: 330px) and (max-width: 360px) {
+ .num-pad{
+     /* padding-left: 15px; */
+    width: 191%;
+    /* margin: 0 -70px 0; */
+    left: -0%;
+    position: absolute;
+    top: 50%;
+    right: 50%;}        }
+@media only screen and (min-width: 361px) and (max-width: 400px) {
+
+    .num-pad{
+     /* padding-left: 15px; */
+    width: 161%;
+    /* margin: 0 -70px 0; */
+    left: -0%;
+    position: absolute;
+    top: 50%;
+    right: 50%;}
+        }
+
+@media only screen and (min-width: 401px) and (max-width: 471px) {
+
+    .num-pad{
+     /* padding-left: 15px; */
+    width: 170%;
+     margin: 0 -64px 0; 
+    left: -0%;
+    position: absolute;
+    top: 50%;
+    right: 50%;}
+             .tel{margin: 0 0 26px;text-align: center;}
+        }
+        
+@media only screen and (min-width: 472px) and (max-width: 479px) {
+
+    .num-pad{
+     /* padding-left: 15px; */
+    width: 151%;
+    /* margin: 0 -70px 0; */
+    left: -0%;
+    position: absolute;
+    top: 50%;
+    right: 50%;}
+        }
+        
+       
+        
+ 
+@media only screen and (min-width: 480px) and (max-width: 690px) {
+
+    .num-pad{
+  /* padding-left: 15px; */
+/* margin: 0 -88px 0; */
+left: -9%;
+position: absolute;
+top: 50%;
+right: 50%;
+    width: 186%;}
+             .tel{margin: 0 0 26px;text-align: center;}
+    .span4{width: 80px;
+height: 75px;
+float: left;
+margin: 0 8px 4px 8px;}
+        }
+       
+        
+         
+        
+        
+@media only screen and (min-width: 691px) and (max-width: 769px) {
+   .num-pad{
+   /* padding-left: 15px; */
+width: 110%;
+margin: 0 129px 0;
+left: -0%;
+position: absolute;
+top: 50%;
+right: 50%;}
+    .tel{background: transparent;
+color: #fff;
+text-align: Center;
+/* font-size: 30px; */
+height: 50px;
+margin: 1px 135px 43px;}
+}
+      
+    </style>
+</head>
+<body>
+	<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-2 col-md-offset-4 phone" style="">
+            <div class="row1">
+                <div class="col-md-12">
+                <input type="tel" style="background:transparent; color:#fff;font-size:30px"name="name" id="notepass" class="form-control tel" value="" readonly/>
+                    <div class="num-pad">
+                    <div class="span4">
+                        <div class="num">
+                            <div class="txt">
+                                1
+                            </div>
+                      </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="txt">
+                                2 <span class="small">
+     
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="txt">
+                                3 <span class="small">
+                   
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="txt">
+                                4 <span class="small">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="txt">
+                                5 <span class="small">
+                                   
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="txt">
+                                6 <span class="small">
+                                 
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="txt">
+                                7 <span class="small">
+                                    
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="txt">
+                                8 <span class="small">
+                                    
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="txt">
+                                9
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="action" id="clear">
+                                C
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="txt">
+                                0 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="num">
+                            <div class="action" id="submit">
+                                #
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+    
+                </div>
+            </div>
+            
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+</div>
+
+	<script type="text/javascript">
+	$(document).ready(function () {
+$("#clear").click(function(){
+    $("#notepass").val("");
+});
+
+$("#submit").click(function(){
+   var getpass = $("#notepass").val();
+
+   var createpass = localStorage.getItem("password");
+    if(getpass==createpass){
+        window.location = "main.html";
+    }else{
+        $("#notepass").val("");
+    }
+});
+    $('.num').click(function () {
+        var num = $(this);
+        var text = $.trim(num.find('.txt').clone().children().remove().end().text());
+        var notepass = $('#notepass');
+        $(notepass).val(notepass.val() + text);
+    });
+
+});
+	</script>
+</body>
+</html>
